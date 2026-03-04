@@ -1,102 +1,254 @@
-<div class="middle-box text-center loginscreen animated fadeInDown" ng-controller="registerCtrl">
-    <div>
-        <div>
-            <h1 class="logo-name">IN+</h1>
+<style>
+    /* Reset e Fundo - Reaproveitando a lógica de login para uniformidade */
+    .register-container-fixed {
+        background-color: #f3f3f4;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    .register-card-fixed {
+        background: #ffffff;
+        width: 100%;
+        max-width: 500px;
+        padding: 45px;
+        border-radius: 20px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .logo-fixed {
+        width: 200px;
+        height: auto;
+        margin-bottom: 20px;
+    }
+
+    .register-card-fixed h1 {
+        font-size: 26px !important;
+        font-weight: 700 !important;
+        color: #212121 !important;
+        margin-bottom: 10px !important;
+        letter-spacing: normal !important;
+    }
+
+    .lead-fixed {
+        font-size: 14px;
+        color: #7b8a97;
+        line-height: 1.5;
+        margin-bottom: 30px;
+    }
+
+    .input-group-fixed {
+        margin-bottom: 15px;
+        border: 1px solid #e0e0e0;
+        border-radius: 12px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        min-height: 50px;
+        background: #fff;
+    }
+
+    .input-icon-fixed {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-right: 1px solid #e0e0e0;
+        font-size: 16px;
+    }
+
+    .input-field-fixed {
+        flex: 1;
+        border: none;
+        padding: 10px 15px;
+        font-size: 15px;
+        outline: none;
+        color: #333;
+    }
+
+    /* Cores dos Ícones */
+    .icon-name-fixed {
+        color: #43A047 !important;
+    }
+
+    .icon-email-fixed {
+        color: #1E88E5 !important;
+    }
+
+    .icon-password-fixed {
+        color: #FFB300 !important;
+    }
+
+    .help-block-fixed {
+        text-align: left;
+        font-size: 12px;
+        margin-top: -10px;
+        margin-bottom: 15px;
+        padding-left: 5px;
+    }
+
+    .btn-register-fixed {
+        background: #033d60 !important;
+        border: none !important;
+        color: #ffffff !important;
+        font-weight: 700;
+        font-size: 15px;
+        height: 48px;
+        border-radius: 10px;
+        padding: 0 40px;
+        margin: 20px auto 0 auto;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.2s, background 0.2s;
+        box-shadow: 0 4px 10px rgba(3, 61, 96, 0.2);
+    }
+
+    .btn-register-fixed:hover {
+        background: #022a47 !important;
+        transform: translateY(-2px);
+    }
+
+    .btn-register-fixed i {
+        margin-right: 10px;
+    }
+
+    .password-toggle-fixed {
+        padding: 0 15px;
+        color: #8a95a6;
+        cursor: pointer;
+        background: transparent;
+        border: none;
+        height: 50px;
+    }
+
+    .terms-fixed {
+        text-align: left;
+        margin-top: 15px;
+        font-size: 13px;
+        color: #666;
+    }
+
+    .login-link-fixed {
+        color: #033d60;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .footer-fixed {
+        margin-top: 35px;
+        font-size: 11px;
+        color: #999;
+    }
+</style>
+
+<div class="register-container-fixed animated fadeIn" ng-controller="registerCtrl">
+    <div class="register-card-fixed">
+        <!-- Logo -->
+        <div class="m-b-sm">
+            <img src="img/logo-ccb-light.png" alt="Logo CCB" class="logo-fixed">
         </div>
-        <h3>Register to IN+</h3>
-        <p>Create account to see it in action.</p>
-        
-        <!-- Mensagem de erro geral -->
-        <div ng-if="errors.general" class="alert alert-danger">
+
+        <h1>Nova Conta</h1>
+        <p class="lead-fixed">
+            Crie sua conta para acessar o sistema administrativo da <br>
+            <strong>Regional Itapevi</strong>.
+        </p>
+
+        <!-- Erro Geral -->
+        <div ng-if="errors.general" class="alert alert-danger m-b-md">
             <i class="fa fa-exclamation-triangle"></i> {{ errors.general }}
         </div>
-        
-        <form class="m-t" role="form" name="registerForm" ng-submit="submitRegister()" novalidate>
+
+        <form role="form" name="registerForm" ng-submit="submitRegister()" novalidate>
+
             <!-- Nome -->
-            <div class="form-group" ng-class="{'has-error': errors.name}">
-                <input type="text" 
-                       class="form-control" 
-                       placeholder="Nome Completo" 
-                       ng-model="user.name"
-                       required
-                       minlength="3"
-                       maxlength="100">
-                <span ng-if="errors.name" class="help-block text-left">
-                    <i class="fa fa-exclamation-circle"></i> {{ errors.name }}
-                </span>
-            </div>
-            
-            <!-- Email -->
-            <div class="form-group" ng-class="{'has-error': errors.email}">
-                <input type="email" 
-                       class="form-control" 
-                       placeholder="Email" 
-                       ng-model="user.email"
-                       required>
-                <span ng-if="errors.email" class="help-block text-left">
-                    <i class="fa fa-exclamation-circle"></i> {{ errors.email }}
-                </span>
-            </div>
-            
-            <!-- Senha -->
-            <div class="form-group" ng-class="{'has-error': errors.password, 'has-warning': errors.passwordWarning}">
-                <input type="password" 
-                       class="form-control" 
-                       placeholder="Senha (mín. 8 caracteres)" 
-                       ng-model="user.password"
-                       required
-                       minlength="8">
-                <span ng-if="errors.password" class="help-block text-left">
-                    <i class="fa fa-exclamation-circle"></i> {{ errors.password }}
-                </span>
-                <span ng-if="errors.passwordWarning" class="help-block text-left text-warning">
-                    <i class="fa fa-info-circle"></i> {{ errors.passwordWarning }}
-                </span>
-                <small class="help-block text-left text-muted">
-                    A senha deve conter: mínimo 8 caracteres, 1 maiúscula, 1 minúscula e 1 número
-                </small>
-            </div>
-            
-            <!-- Confirmar Senha -->
-            <div class="form-group" ng-class="{'has-error': errors.confirmPassword}">
-                <input type="password" 
-                       class="form-control" 
-                       placeholder="Confirmar Senha" 
-                       ng-model="user.confirmPassword"
-                       required>
-                <span ng-if="errors.confirmPassword" class="help-block text-left">
-                    <i class="fa fa-exclamation-circle"></i> {{ errors.confirmPassword }}
-                </span>
-            </div>
-            
-            <!-- Termos -->
-            <div class="form-group" ng-class="{'has-error': errors.agreeTerms}">
-                <div class="checkbox i-checks">
-                    <label> 
-                        <input type="checkbox" ng-model="user.agreeTerms" required>
-                        <i></i> Concordo com os termos e políticas 
-                    </label>
+            <div class="input-group-fixed" ng-class="{'has-error': errors.name}">
+                <div class="input-icon-fixed">
+                    <i class="fa fa-user icon-name-fixed"></i>
                 </div>
-                <span ng-if="errors.agreeTerms" class="help-block text-left">
-                    <i class="fa fa-exclamation-circle"></i> {{ errors.agreeTerms }}
-                </span>
+                <input type="text" class="input-field-fixed" placeholder="Nome Completo" ng-model="user.name" required
+                    minlength="3">
             </div>
-            
-            <!-- Botão de Registro -->
-            <button type="submit" 
-                    class="btn btn-primary block full-width m-b" 
-                    ng-disabled="loading || registerForm.$invalid">
+            <div ng-if="errors.name" class="help-block-fixed text-danger">
+                <small>{{ errors.name }}</small>
+            </div>
+
+            <!-- E-mail -->
+            <div class="input-group-fixed" ng-class="{'has-error': errors.email}">
+                <div class="input-icon-fixed">
+                    <i class="fa fa-envelope icon-email-fixed"></i>
+                </div>
+                <input type="email" class="input-field-fixed" placeholder="E-mail" ng-model="user.email" required>
+            </div>
+            <div ng-if="errors.email" class="help-block-fixed text-danger">
+                <small>{{ errors.email }}</small>
+            </div>
+
+            <!-- Senha -->
+            <div class="input-group-fixed" ng-class="{'has-error': errors.password}">
+                <div class="input-icon-fixed">
+                    <i class="fa fa-lock icon-password-fixed"></i>
+                </div>
+                <input type="{{ showPassword ? 'text' : 'password' }}" class="input-field-fixed"
+                    placeholder="Senha (mín. 8 caracteres)" ng-model="user.password" required>
+                <button type="button" class="password-toggle-fixed" ng-click="showPassword = !showPassword">
+                    <i class="fa" ng-class="showPassword ? 'fa-eye' : 'fa-eye-slash'"></i>
+                </button>
+            </div>
+            <div ng-if="errors.password" class="help-block-fixed text-danger">
+                <small>{{ errors.password }}</small>
+            </div>
+
+            <!-- Confirmar Senha -->
+            <div class="input-group-fixed" ng-class="{'has-error': errors.confirmPassword}">
+                <div class="input-icon-fixed">
+                    <i class="fa fa-check-circle icon-password-fixed"></i>
+                </div>
+                <input type="{{ showConfirmPassword ? 'text' : 'password' }}" class="input-field-fixed"
+                    placeholder="Confirmar Senha" ng-model="user.confirmPassword" required>
+                <button type="button" class="password-toggle-fixed"
+                    ng-click="showConfirmPassword = !showConfirmPassword">
+                    <i class="fa" ng-class="showConfirmPassword ? 'fa-eye' : 'fa-eye-slash'"></i>
+                </button>
+            </div>
+            <div ng-if="errors.confirmPassword" class="help-block-fixed text-danger">
+                <small>{{ errors.confirmPassword }}</small>
+            </div>
+
+            <!-- Termos e Condições -->
+            <div class="terms-fixed" ng-class="{'has-error': errors.agreeTerms}">
+                <label>
+                    <input type="checkbox" ng-model="user.agreeTerms" required>
+                    Concordo com os <a href="#" class="login-link-fixed">termos e políticas</a>.
+                </label>
+                <div ng-if="errors.agreeTerms" class="text-danger">
+                    <small>{{ errors.agreeTerms }}</small>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-register-fixed" ng-disabled="loading || registerForm.$invalid">
                 <span ng-if="!loading">
-                    <i class="fa fa-user-plus"></i> Registrar
+                    <i class="fa fa-paper-plane"></i> CRIAR CONTA
                 </span>
                 <span ng-if="loading">
-                    <i class="fa fa-spinner fa-spin"></i> Processando...
+                    <i class="fa fa-spinner fa-spin"></i> PROCESSANDO...
                 </span>
             </button>
 
-            <p class="text-muted text-center"><small>Já possui uma conta?</small></p>
-            <a class="btn btn-sm btn-white btn-block" ui-sref="logins">Login</a>
+            <div class="m-t-lg">
+                <p class="text-muted"><small>Já possui uma conta?</small></p>
+                <a ui-sref="login" class="login-link-fixed">Fazer Login</a>
+            </div>
         </form>
-        <p class="m-t"> <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small> </p>
+
+        <div class="footer-fixed">
+            <p>&copy; SAC v1.1.2 - Regional Itapevi</p>
+        </div>
     </div>
 </div>

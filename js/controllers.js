@@ -3669,38 +3669,7 @@ function ValidationService() {
 /**
  * registerCtrl - Controller de Registro Seguro
  */
-function registerCtrl($scope, AuthService, ValidationService, $state, $injector) {
-    // Tenta usar toaster, se não disponível usa notify ou alert
-    var notifyService = null;
-    try {
-        notifyService = $injector.get('toaster');
-    } catch (e) {
-        try {
-            notifyService = $injector.get('notify');
-        } catch (e2) {
-            notifyService = null;
-        }
-    }
-
-    // Função auxiliar para notificações
-    var notify = function (type, title, message) {
-        if (notifyService) {
-            if (notifyService.success) {
-                // toaster
-                if (type === 'success') notifyService.success(title, message);
-                else if (type === 'error') notifyService.error(title, message);
-                else if (type === 'warning') notifyService.warning(title, message);
-            } else {
-                // notify
-                var classes = type === 'success' ? 'alert-success' :
-                    type === 'error' ? 'alert-danger' : 'alert-warning';
-                notifyService({ message: title + ': ' + message, classes: classes });
-            }
-        } else {
-            // Fallback para alert nativo
-            alert(title + ': ' + message);
-        }
-    };
+function registerCtrl($scope, AuthService, ValidationService, $state, $timeout, SweetAlert) {
     $scope.user = {
         name: '',
         email: '',
@@ -3711,6 +3680,8 @@ function registerCtrl($scope, AuthService, ValidationService, $state, $injector)
 
     $scope.errors = {};
     $scope.loading = false;
+    $scope.showPassword = false;
+    $scope.showConfirmPassword = false;
 
     /**
      * Valida formulário completo
@@ -3765,7 +3736,12 @@ function registerCtrl($scope, AuthService, ValidationService, $state, $injector)
 
         // Valida formulário
         if (!$scope.validateForm()) {
-            notify('error', 'Erro', 'Por favor, corrija os erros no formulário');
+            SweetAlert.swal({
+                title: "Erro no Formulário",
+                text: "Por favor, preencha todos os campos corretamente.",
+                type: "warning",
+                confirmButtonColor: "#033d60"
+            });
             return;
         }
 
@@ -3782,16 +3758,31 @@ function registerCtrl($scope, AuthService, ValidationService, $state, $injector)
         AuthService.register(registerData)
             .then(function (response) {
                 $scope.loading = false;
-                notify('success', 'Sucesso', 'Registro realizado com sucesso! Redirecionando...');
+
+                SweetAlert.swal({
+                    title: "Conta Criada!",
+                    text: "Seu registro foi realizado com sucesso. Redirecionando para o login...",
+                    type: "success",
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+
                 // Redireciona após 2 segundos
-                setTimeout(function () {
-                    $state.go('logins');
+                $timeout(function () {
+                    $state.go('login');
                 }, 2000);
             })
             .catch(function (error) {
                 $scope.loading = false;
                 var errorMessage = error.message || 'Erro ao realizar registro. Tente novamente.';
-                notify('error', 'Erro', errorMessage);
+
+                SweetAlert.swal({
+                    title: "Erro no Registro",
+                    text: errorMessage,
+                    type: "error",
+                    confirmButtonColor: "#033d60"
+                });
+
                 $scope.errors.general = errorMessage;
             });
     };
