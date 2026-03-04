@@ -35,8 +35,8 @@ tmp/
 # NODE / FRONT-END
 # ===============================
 node_modules/
-dist/
-build/
+/dist/
+/build/
 .next/
 out/
 
