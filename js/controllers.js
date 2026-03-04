@@ -3961,4 +3961,5 @@ function loginCtrl($scope, AuthService, ValidationService, $state, $injector, Sw
 angular
     .module('inspinia')
     .controller('MainCtrl', MainCtrl)
-    .controller('loginCtrl', loginCtrl);
+    .controller('loginCtrl', loginCtrl)
+    .controller('registerCtrl', registerCtrl);
