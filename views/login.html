@@ -1,53 +1,208 @@
-<div class="middle-box text-center loginscreen animated fadeInDown" ng-controller="loginCtrl">
-    <div>
-        <div>
-            <h1 class="logo-name">IN+</h1>
+<style>
+    /* Reset e Fundo */
+    .login-container-fixed {
+        background-color: #f3f3f4;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    .login-card-fixed {
+        background: #ffffff;
+        width: 100%;
+        max-width: 500px;
+        /* Aumentado para não ser "estreito" */
+        padding: 45px;
+        border-radius: 20px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .logo-fixed {
+        width: 220px;
+        height: auto;
+        margin-bottom: 25px;
+    }
+
+    /* Garantir que o H1 não receba estilos gigantes do Inspinia */
+    .login-card-fixed h1 {
+        font-size: 28px !important;
+        font-weight: 700 !important;
+        color: #212121 !important;
+        margin-bottom: 15px !important;
+        letter-spacing: normal !important;
+    }
+
+    .lead-fixed {
+        font-size: 15px;
+        color: #7b8a97;
+        line-height: 1.6;
+        margin-bottom: 35px;
+    }
+
+    .input-group-fixed {
+        margin-bottom: 20px;
+        border: 1px solid #e0e0e0;
+        border-radius: 12px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        min-height: 54px;
+        background: #fff;
+    }
+
+    .input-icon-fixed {
+        width: 54px;
+        height: 54px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-right: 1px solid #e0e0e0;
+        font-size: 18px;
+    }
+
+    .input-field-fixed {
+        flex: 1;
+        border: none;
+        padding: 12px 18px;
+        font-size: 16px;
+        outline: none;
+        color: #333;
+    }
+
+    .icon-email-fixed {
+        color: #1E88E5 !important;
+    }
+
+    .icon-password-fixed {
+        color: #FFB300 !important;
+    }
+
+    .btn-login-fixed {
+        background: #033d60 !important;
+        border: none !important;
+        color: #ffffff !important;
+        font-weight: 700;
+        font-size: 15px;
+        height: 48px;
+        border-radius: 10px;
+        padding: 0 40px;
+        /* Reduzido para não ser full-width */
+        margin: 15px auto 0 auto;
+        display: inline-flex;
+        /* Alterado para inline-flex para não ocupar toda a largura */
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.2s, background 0.2s;
+        box-shadow: 0 4px 10px rgba(3, 61, 96, 0.2);
+    }
+
+
+    .btn-login-fixed:hover {
+        background: #022a47 !important;
+        transform: translateY(-2px);
+    }
+
+    .btn-login-fixed i {
+        margin-right: 10px;
+    }
+
+    .password-toggle-fixed {
+        padding: 10px 15px;
+        color: #8a95a6;
+        cursor: pointer;
+        background: transparent;
+        border: none;
+    }
+
+    .register-btn-fixed {
+        background: #ffffff;
+        border: 1px solid #e0e0e0;
+        color: #7b8a97;
+        font-size: 14px;
+        padding: 14px;
+        border-radius: 12px;
+        text-decoration: none;
+        display: block;
+        margin-top: 15px;
+        transition: all 0.2s;
+    }
+
+    .register-btn-fixed:hover {
+        background: #f8f9fa;
+        color: #333;
+    }
+
+    .footer-fixed {
+        margin-top: 40px;
+        font-size: 12px;
+        color: #999;
+    }
+</style>
+
+<div class="login-container-fixed animated fadeIn" ng-controller="loginCtrl">
+    <div class="login-card-fixed">
+        <!-- Logo -->
+        <div class="m-b-md">
+            <img src="img/logo-ccb-light.png" alt="Logo CCB" class="logo-fixed">
         </div>
-        <h3>Welcome to IN+</h3>
-        <p>Perfectly designed and precisely prepared admin theme with over 50 pages with extra new web app views.</p>
-        <p>Login in. To see it in action.</p>
-        
-        <!-- Mensagem de erro geral -->
-        <div ng-if="errors.general" class="alert alert-danger">
+
+        <h1>Bem-vindos</h1>
+        <p class="lead-fixed">
+            Sistema Administrativo, criado para facilitar a administração da Congregação Cristã no
+            Brasil<br>
+            <strong>Regional Itapevi</strong>.
+        </p>
+
+        <!-- Erro Geral -->
+        <div ng-if="errors.general" class="alert alert-danger m-b-lg">
             <i class="fa fa-exclamation-triangle"></i> {{ errors.general }}
         </div>
-        
-        <form class="m-t" role="form" name="loginForm" ng-submit="submitLogin()" novalidate>
-            <div class="form-group" ng-class="{'has-error': errors.email}">
-                <input type="email" 
-                       class="form-control" 
-                       placeholder="Email" 
-                       ng-model="credentials.email"
-                       required>
-                <span ng-if="errors.email" class="help-block text-left">
-                    <i class="fa fa-exclamation-circle"></i> {{ errors.email }}
-                </span>
+
+        <form role="form" name="loginForm" ng-submit="submitLogin()" novalidate>
+            <!-- E-mail -->
+            <div class="input-group-fixed">
+                <div class="input-icon-fixed">
+                    <i class="fa fa-envelope icon-email-fixed"></i>
+                </div>
+                <input type="text" class="input-field-fixed" placeholder="E-mail ou Usuário"
+                    ng-model="credentials.email" required>
             </div>
-            <div class="form-group" ng-class="{'has-error': errors.password}">
-                <input type="password" 
-                       class="form-control" 
-                       placeholder="Password" 
-                       ng-model="credentials.password"
-                       required>
-                <span ng-if="errors.password" class="help-block text-left">
-                    <i class="fa fa-exclamation-circle"></i> {{ errors.password }}
-                </span>
+
+            <!-- Senha -->
+            <div class="input-group-fixed">
+                <div class="input-icon-fixed">
+                    <i class="fa fa-lock icon-password-fixed"></i>
+                </div>
+                <input type="{{ showPassword ? 'text' : 'password' }}" class="input-field-fixed" placeholder="Senha"
+                    ng-model="credentials.password" required>
+                <button type="button" class="password-toggle-fixed" ng-click="showPassword = !showPassword">
+                    <i class="fa" ng-class="showPassword ? 'fa-eye' : 'fa-eye-slash'"></i>
+                </button>
             </div>
-            <button type="submit" 
-                    class="btn btn-primary block full-width m-b" 
-                    ng-disabled="loading || loginForm.$invalid">
+
+            <button type="submit" class="btn-login-fixed" ng-disabled="loading || loginForm.$invalid">
                 <span ng-if="!loading">
-                    <i class="fa fa-sign-in"></i> Login
+                    <i class="fa fa-paper-plane"></i> LOGIN
                 </span>
                 <span ng-if="loading">
-                    <i class="fa fa-spinner fa-spin"></i> Entrando...
+                    <i class="fa fa-spinner fa-spin"></i> ENTRANDO...
                 </span>
             </button>
 
-            <a ui-sref="forgot_password"><small>Forgot password?</small></a>
-            <p class="text-muted text-center"><small>Do not have an account?</small></p>
-            <a class="btn btn-sm btn-white btn-block" ui-sref="register">Create an account</a>
+            <a ui-sref="forgot_password" style="display: block; margin-top: 20px;"><small>Esqueceu a senha?</small></a>
+
+            <div class="m-t-xl">
+                <p class="text-muted"><small>Não tem uma conta?</small></p>
+                <a class="register-btn-fixed" ui-sref="register">Criar conta</a>
+            </div>
         </form>
-        <p class="m-t"> <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small> </p>
+
+        <div class="footer-fixed">
+            <p>&copy; SAC v1.1.2 - Regional Itapevi</p>
+        </div>
     </div>
 </div>

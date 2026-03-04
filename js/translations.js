@@ -8,7 +8,7 @@ function config($translateProvider) {
         .translations('en', {
 
             // Define all menu elements
-            DASHBOARD: 'Dashboard',            
+            DASHBOARD: 'Dashboard',
             GRAPHS: 'Graphs',
             MAILBOX: 'Mailbox',
             WIDGETS: 'Widgets',
@@ -33,6 +33,10 @@ function config($translateProvider) {
             MUSICA: 'Música',
             INSTRUMENTOS: 'Instrumentos',
             MUSICALIZACAO: 'Musicalização',
+            EBI: 'E.B.I',
+            DARPE: 'D.A.R.P.E',
+            GEM: 'G.E.M',
+            DEPAC: 'D.E.P.A.C',
 
             // Define some custom text
             WELCOME: 'Welcome Amelia',

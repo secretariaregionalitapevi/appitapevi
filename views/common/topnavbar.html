@@ -4,13 +4,14 @@
             <span minimaliza-sidebar></span>
             <form role="search" class="navbar-form-custom" method="post" action="views/search_results.html">
                 <div class="form-group">
-                    <input type="text" placeholder="{{ 'SEARCH' | translate }}" class="form-control" name="top-search" id="top-search">
+                    <input type="text" placeholder="{{ 'SEARCH' | translate }}" class="form-control" name="top-search"
+                        id="top-search">
                 </div>
             </form>
         </div>
         <ul class="nav navbar-top-links navbar-right">
             <!--<li>-->
-                <!--<span class="m-r-sm text-muted welcome-message">Welcome to INSPINIA+ Admin Theme.</span>-->
+            <!--<span class="m-r-sm text-muted welcome-message">Welcome to INSPINIA+ Admin Theme.</span>-->
             <!--</li>-->
             <li>
                 <span class="m-r-sm text-muted welcome-message">Bem-vindo <strong>Ricardo</strong>.</span>
@@ -27,9 +28,9 @@
                             </a>
 
                             <div>
-                                <small class="pull-right">46h ago</small>
-                                <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
-                                <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
+                                <small class="pull-right">46h atrás</small>
+                                <strong>Mike Loreipsum</strong> começou a seguir <strong>Monica Smith</strong>. <br>
+                                <small class="text-muted">3 dias atrás às 19:58 - 10.06.2014</small>
                             </div>
                         </div>
                     </li>
@@ -41,9 +42,10 @@
                             </a>
 
                             <div>
-                                <small class="pull-right text-navy">5h ago</small>
-                                <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>
-                                <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
+                                <small class="pull-right text-navy">5h atrás</small>
+                                <strong>Chris Johnatan Overtunk</strong> começou a seguir <strong>Monica
+                                    Smith</strong>. <br>
+                                <small class="text-muted">Ontem às 13:21 - 11.06.2014</small>
                             </div>
                         </div>
                     </li>
@@ -55,9 +57,9 @@
                             </a>
 
                             <div>
-                                <small class="pull-right">23h ago</small>
-                                <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>
-                                <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
+                                <small class="pull-right">23h atrás</small>
+                                <strong>Monica Smith</strong> curtiu <strong>Kim Smith</strong>. <br>
+                                <small class="text-muted">2 dias atrás às 02:30 - 11.06.2014</small>
                             </div>
                         </div>
                     </li>
@@ -79,8 +81,8 @@
                     <li>
                         <a ui-sref="inbox">
                             <div>
-                                <i class="fa fa-envelope fa-fw"></i> You have 16 messages
-                                <span class="pull-right text-muted small">4 minutes ago</span>
+                                <i class="fa fa-envelope fa-fw"></i> Você tem 16 mensagens
+                                <span class="pull-right text-muted small">4 minutos atrás</span>
                             </div>
                         </a>
                     </li>
@@ -88,8 +90,8 @@
                     <li>
                         <a ui-sref="profile">
                             <div>
-                                <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                <span class="pull-right text-muted small">12 minutes ago</span>
+                                <i class="fa fa-twitter fa-fw"></i> 3 novos seguidores
+                                <span class="pull-right text-muted small">12 minutos atrás</span>
                             </div>
                         </a>
                     </li>
@@ -97,8 +99,8 @@
                     <li>
                         <a ui-sref="grid_options">
                             <div>
-                                <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                <span class="pull-right text-muted small">4 minutes ago</span>
+                                <i class="fa fa-upload fa-fw"></i> Reinício do Servidor
+                                <span class="pull-right text-muted small">4 minutos atrás</span>
                             </div>
                         </a>
                     </li>
@@ -114,7 +116,7 @@
                 </ul>
             </li>
             <li>
-                <a ui-sref="login">
+                <a ng-click="main.logout()" href="javascript:void(0)">
                     <i class="fa fa-sign-out"></i> Sair
                 </a>
             </li>
